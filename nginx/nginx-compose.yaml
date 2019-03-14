@@ -1,0 +1,29 @@
+version: '3.0'
+services:
+  nginx:
+    image: nginx:1.15-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /opt/volumes/nginx/:/etc/nginx/conf.d
+      - /opt/volumes/nginx-pages/:/var/www/default
+      - /opt/volumes/certbot/conf:/etc/letsencrypt
+      - /opt/volumes/certbot/www:/var/www/certbot
+    restart: always
+    networks:
+      - overlay
+    command: "/bin/sh -c 'while :; do sleep 13d & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - /opt/volumes/certbot/conf:/etc/letsencrypt
+      - /opt/volumes/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 25d & wait $${!}; done;'"
+    restart: always
+    networks:
+      - overlay
+    depends_on:
+      - nginx
+networks:
+  overlay:

@@ -1,4 +1,4 @@
-<p style="text-align:center">
+<p align="center">
     <img width="682" height="355" src ="https://raw.githubusercontent.com/slysterous/go-tarou/w-img/go-tarou.png" />
 </p>
 

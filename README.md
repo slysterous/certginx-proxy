@@ -15,7 +15,7 @@ At some point i got a sweet new VPS that cost me less than 10$/month. Then I tho
 
 # Installation
 ```bash 
-git clone https://github.com/slysterous/certginx-proxy.git
+git clone https://github.com/slysterous/go-tarou.git
 ```
 # Usage
 
